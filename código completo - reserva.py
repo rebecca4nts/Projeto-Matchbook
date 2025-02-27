@@ -135,7 +135,7 @@ def validar_senha(senha):
 def validar_cidade(cidade):
     #Verifica se a cidade tem pelo menos 3 letras e não contém números ou caracteres especiais.
     if len(cidade) < 3 or not cidade.replace(" ", "").isalpha():
-        print("❌ Cidade inválida! Digite um nome válido (mínimo 3 letras, sem números ou caracteres especiais).")
+        print("✕ Cidade inválida! Digite um nome válido (mínimo 3 letras, sem números ou caracteres especiais).")
         return False
     return True
 
@@ -148,7 +148,7 @@ def validar_estado(estado):
     }
     
     if estado.upper() not in estados_validos:
-        print("❌ UF inválida! Digite a sigla correta do estado (ex: SP, RJ, MG).")
+        print("✕ UF inválida! Digite a sigla correta do estado (ex: SP, RJ, MG).")
         return False
     return True
 
@@ -193,7 +193,7 @@ def cadastrar_livros(usuario):
     livros_oferecidos = usuario.get("livros_oferecidos", [])
     livros_desejados = usuario.get("livros_desejados", [])
 
-    print("\n📚 Cadastro de Livros 📚")
+    print("\n✶ Cadastro de Livros ✶")
     while True:
         livro = input("De qual livro gostaria de se desfazer?: ").strip()
         if livro:
@@ -217,7 +217,7 @@ def cadastrar_livros(usuario):
 def buscar_match(usuario, usuarios_cadastrados):
     """Busca um usuário compatível para troca de livros"""
     limpar_tela()
-    print("\n🔍 Buscando um usuário compatível...\n")
+    print("\n⌕ Buscando um usuário compatível...\n")
     matches = []
 
     for u in usuarios_cadastrados:
@@ -227,19 +227,19 @@ def buscar_match(usuario, usuarios_cadastrados):
                 matches.append(u)
 
     if matches:
-        print("🎉 Deu match! Você é compatível com:")
+        print("★ Deu match! Você é compatível com:")
         for match in matches:
-            print(f"🔹 {match['nome']} - 📍 {match['cidade']}/{match['estado']}")
-            print(f"   Oferece: {', '.join(match['livros_oferecidos'])}")
-            print(f"   Deseja: {', '.join(match['livros_desejados'])}")
+            print(f"⟡ {match['nome']} - ➮ {match['cidade']}/{match['estado']}")
+            print(f"↻   Oferece: {', '.join(match['livros_oferecidos'])}")
+            print(f"»   Deseja: {', '.join(match['livros_desejados'])}")
             print("-" * 40)
     else:
-        print("\n❌ Ops! Nenhum match encontrado no momento.")
+        print("\n✕ Ops! Nenhum match encontrado no momento.")
         while True:
             print("\nO que deseja fazer agora?")
-            print("1️⃣ - Mostrar mais opções")
-            print("2️⃣ - Cadastrar outros livros")
-            print("3️⃣ - Voltar ao menu principal")
+            print("1️❏ - Mostrar mais opções")
+            print("2️❏ - Cadastrar outros livros")
+            print("3️❏ - Voltar ao menu principal")
 
             opcao = input("\nDigite a opção desejada: ").strip()
 
@@ -249,14 +249,14 @@ def buscar_match(usuario, usuarios_cadastrados):
                 usuario = cadastrar_livros(usuario)
                 return buscar_match(usuario, usuarios_cadastrados)
             elif opcao == "3":
-                print("\n🔙 Retornando ao menu principal...\n")
+                print("\n↺ Retornando ao menu principal...\n")
                 return
             else:
-                print("\n⚠️ Opção inválida, tente novamente.")
+                print("\n⚠ Opção inválida, tente novamente.")
 
 def mostrar_mais_opcoes(usuario, usuarios_cadastrados):
     """Mostra opções de usuários que possuem pelo menos parte dos livros desejados"""
-    print("\n🔎 Exibindo mais opções...")
+    print("\n⌕ Exibindo mais opções...")
 
     # Verifica se há usuários cadastrados
     print("Usuários cadastrados:", len(usuarios_cadastrados))
@@ -278,14 +278,14 @@ def mostrar_mais_opcoes(usuario, usuarios_cadastrados):
 
                 encontrou_opcoes = True  # Indica que há opções compatíveis
                 
-                print(f"\n🔹 {u['nome']} - 📍 {u['cidade']}/{u['estado']}")
-                print(f"   📚 Oferece: {', '.join(u['livros_oferecidos'])}")
-                print(f"   🔄 Deseja: {', '.join(u['livros_desejados'])}")
-                print(f"   ✉️ Contato: {(u['email'])}")
+                print(f"\n⟡ {u['nome']} - ➮ {u['cidade']}/{u['estado']}")
+                print(f"    Oferece: {', '.join(u['livros_oferecidos'])}")
+                print(f"    Deseja: {', '.join(u['livros_desejados'])}")
+                print(f"   ✉ Contato: {(u['email'])}")
                 print("-" * 40)
     
     if not encontrou_opcoes:
-        print("\n❌ Nenhuma opção encontrada com os critérios especificados.")
+        print("\n✕ Nenhuma opção encontrada com os critérios especificados.")
 
 # Fluxo principal do programa
 usuario = cadastrar_usuario()
